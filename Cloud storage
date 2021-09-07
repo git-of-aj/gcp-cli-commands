@@ -1,9 +1,11 @@
+
+
 which bash | tee storage.sh || touch storage.sh
 
 cat << EOF >> storage.sh
 
 
-gsuil mb gs://$DEVSHELL_PROJECT_ID
+gsutil mb gs://$DEVSHELL_PROJECT_ID
 
 wget --output-document ada.jpg https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Ada_Lovelace_portrait.jpg/800px-Ada_Lovelace_portrait.jpg
 
