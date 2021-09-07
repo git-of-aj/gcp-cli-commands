@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+gcloud auth list
+
+sudo apt-get update ; sudo apt-get install virtualenv
+virtualenv -p python3 venv ; source venv/bin/activate
+pip install --upgrade google-cloud-pubsub && git clone https://github.com/googleapis/python-pubsub.git && cd python-pubsub/samples/snippets
+export GLOBAL_CLOUD_PROJECT=GCP Project ID
+python publisher.py $GLOBAL_CLOUD_PROJECT create MyTopic
+
+#create a subscription
+
+python subscriber.py $GLOBAL_CLOUD_PROJECT create MyTopic MySub
+
+echo 'all your magic done'
