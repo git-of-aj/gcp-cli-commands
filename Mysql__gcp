@@ -1,0 +1,12 @@
+gcloud sql instances create myinstance
+
+gcloud sql users set-password root \
+
+--host=% \
+
+--instance myinstance \
+
+--password Anany@09
+
+gcloud sql databases create guestbook \
+--instance=myinstance \
