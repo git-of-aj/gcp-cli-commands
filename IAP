@@ -1,1 +1,11 @@
+#!/use/bin/env bash
 
+git clone https://github.com/googlecodelabs/user-authentication-with-iap.git
+
+cd user-authentication-with-iap
+
+gcloud app deploy
+
+gcloud app browse
+
+echo -e "App deployed \n go check it out " 
