@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+echo ' this bash script creates a bucket'
+
+gsutil mb gs://$DEVSHELL_PROJECT_ID
+
+wget --output-document sample.txt https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Ada_Lovelace_portrait.jpg/800px-Ada_Lovelace_portrait.jpg
+
