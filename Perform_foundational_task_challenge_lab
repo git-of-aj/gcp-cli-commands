@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#create a bucket
+
+gsutil mb gs://$DEVSHELL_PROJECT_ID
+
+#create a pub sub topic
+
+gcloud pubsub topics create mytopic
+
+#create a cloud function
+
+git clone https://github.com/Ananyojha/cloud-functions.git
+
+cd cloud-functions
+
+gcloud functions deploy function_1 \
+--runtime nodejs14 \
+--trigger-resource $DEVSHELL_PROJECT_ID \
+--trigger-event google.storage.object.finalize
+
+
+#check if the thumbnail is created
+
+wget --output-document ada.jpg https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Ada_Lovelace_portrait.jpg/800px-Ada_Lovelace_portrait.jpg
+
+gsutil cp ada.jpg gs://$DEVSHELL_PROJECT_ID
