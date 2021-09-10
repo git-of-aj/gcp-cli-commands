@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+gcloud compute instances create lamp-1-vm \
+  --machine-type n1-standard-2
+  --zone us-central1-a \
+  --metadata startup-script="#! /bin/bash
+    sudo apt-get update
+    sudo apt-get install apache2 php7.0
+    sudo service apache2 restart"
+
+gcloud compute ssh --project=$DEVSHELL_PROJECT_ID \
+ --zone=us-central1-a lamp-1-vm
+
+curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh
+sudo bash add-monitoring-agent-repo.sh
+
+
+sudo apt-get update
+sudo apt-get install stackdriver-agent
+
+
+curl -sSO https://dl.google.com/cloudagents/add-logging-agent-repo.sh
+sudo bash add-logging-agent-repo.sh
+
+sudo apt-get update
+
+sudo apt-get install google-fluentd
+
+echo -e " now start from \n Create an uptime check "
