@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
 cat<<EOF>mangu.sh
 
 #!/usr/bin/env bash
@@ -14,6 +18,8 @@ gcloud config set default compute/region us-central1
 gcloud compute instances create blue \
   --tags web-server \
   --metadata-from-file=startup-script=mangu.sh
+
+sed -i 's/blue/green/g' mangu.sh
 
 gcloud compute instances create green \
   --tags web-server \
