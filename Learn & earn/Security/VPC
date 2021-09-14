@@ -1,6 +1,11 @@
 cat<<EOF>mangu.sh
+
 #!/usr/bin/env bash
+
 sudo apt-get install nginx-light -y
+sed -i 's/<h1>Welcome to nginx!</h1>/<h1>Welcome to the blue server!</h1>/g' /var/www/html/index.nginx-debian.html
+
+EOF
 
 
 gcloud config set default compute/zone us-central1-a
@@ -9,3 +14,16 @@ gcloud config set default compute/region us-central1
 gcloud compute instances create blue \
   --tags web-server \
   --metadata-from-file=startup-script=mangu.sh
+
+gcloud compute instances create green \
+  --tags web-server \
+  --metadata-from-file=startup-script=mangu.sh
+
+gcloud compute firewall-rules create allow-http-web-server \
+  --target-tags web-server \
+  --source-ranges 0.0.0.0/0 \
+  --rules TCP:80, icmp
+
+gcloud compute instances create test-vm --machine-type=f1-micro --subnet=default --zone=us-central1-a
+
+
