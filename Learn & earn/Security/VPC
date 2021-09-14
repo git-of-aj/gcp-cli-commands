@@ -1,0 +1,11 @@
+cat<<EOF>mangu.sh
+#!/usr/bin/env bash
+sudo apt-get install nginx-light -y
+
+
+gcloud config set default compute/zone us-central1-a
+gcloud config set default compute/region us-central1
+
+gcloud compute instances create blue \
+  --tags web-server \
+  --metadata-from-file=startup-script=mangu.sh
