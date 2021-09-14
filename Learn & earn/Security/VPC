@@ -2,6 +2,11 @@
 
 set -e
 
+
+
+gcloud config set  compute/zone us-central1-a
+gcloud config set  compute/region us-central1
+
 cat<<EOF>mangu.sh
 
 #!/usr/bin/env bash
@@ -11,9 +16,6 @@ sed -i 's/Welcome to nginx!/Welcome to the blue server!/g' /var/www/html/index.n
 
 EOF
 
-
-gcloud config set default compute/zone us-central1-a
-gcloud config set default compute/region us-central1
 
 gcloud compute instances create blue \
   --tags web-server \
