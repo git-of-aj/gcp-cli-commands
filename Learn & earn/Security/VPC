@@ -7,7 +7,7 @@ cat<<EOF>mangu.sh
 #!/usr/bin/env bash
 
 sudo apt-get install nginx-light -y
-sed -i 's/<h1>Welcome to nginx!</h1>/<h1>Welcome to the blue server!</h1>/g' /var/www/html/index.nginx-debian.html
+sed -i 's/Welcome to nginx!/Welcome to the blue server!/g' /var/www/html/index.nginx-debian.html
 
 EOF
 
