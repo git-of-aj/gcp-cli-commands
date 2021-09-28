@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#stop the script if things go unexpected
+set -e
+
 #create a bucket
 
 gsutil mb gs://$DEVSHELL_PROJECT_ID
@@ -17,6 +20,7 @@ cd cloud-functions
 gcloud functions deploy function_1 \
 --runtime nodejs14 \
 --trigger-resource $DEVSHELL_PROJECT_ID \
+--entry-point thumbnail \
 --trigger-event google.storage.object.finalize
 
 
