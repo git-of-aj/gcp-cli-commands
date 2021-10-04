@@ -8,10 +8,19 @@ gsutil cp gs://cloud-training/gsp323/lab.csv .
 
 gsutil cp gs://cloud-training/gsp323/lab.schema .
 
-cat lab.schema
+cat lab.schema>bigquery.json
+
+nano bigquery.json
+
+
+bq --source_format=CSV \
+$DEVSHELL_PROJECT_ID:lab.customers \
+gs://cloud-training/gsp323/lab.csv \
+bigquery.json
 
 echo -e " $(tput setaf 99) Are you all done ? $(tput sgr 0) "
-read -p " please say yes "
+read -p " please say yes " variable
+echo $variable
 
 
 gcloud dataflow jobs run job1 \
